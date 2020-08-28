@@ -5,19 +5,12 @@ from sklearn.base import BaseEstimator, TransformerMixin
 class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
-        
+        self._ ChangeValues(self, X)
 
     def fit(self, X, y=None):
         return self
     
-    
-    
-
-    def transform(self, X):
-        # Primeiro realizamos a cópia do dataframe 'X' de entrada
-        data = X.copy()
-        # Retornamos um novo dataframe sem as colunas indesejadas
-        def norm(self, X):
+    def norm(self, X):
             from sklearn.preprocessing import Normalizer
             from sklearn.preprocessing import normalize
             #Quito los datos que no se van a normalizar
@@ -41,7 +34,8 @@ class DropColumns(BaseEstimator, TransformerMixin):
 
             return df_data_3
 
-            def ChangeValues(self, X):
+    def ChangeValues(self, X):
+                
                 from sklearn.impute import SimpleImputer
                 # Crear un objeto si para llenar con ceros
                 si_cero = SimpleImputer(
@@ -69,11 +63,19 @@ class DropColumns(BaseEstimator, TransformerMixin):
                        'AVG_SCORE_DATASCIENCE', 'AVG_SCORE_BACKEND', 'AVG_SCORE_FRONTEND',
                        'PROFILE'])
 
-                df_data_3 = norm(df_data_3)
+                df_data_3 = self.norm(df_data_3)
 
                 return df_data_3
-            
+    
+    
+
+    def transform(self, X):
+        
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        data = X.copy()
+        # Retornamos um novo dataframe sem as colunas indesejadas
+                    
         data.drop(labels=self.columns, axis='columns')
-        df_data_3 = ChangeValues(data)
+        df_data_3 = self.ChangeValues(data)
         
         return df_data_3
